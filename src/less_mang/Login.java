@@ -42,7 +42,7 @@ public class Login extends javax.swing.JFrame {
     // bg image
     
         public void bg(){
-        ImageIcon icon =new ImageIcon("C:\\Users\\kasun\\OneDrive\\Desktop\\Java\\lesson_manager\\img\\bg.png");
+        ImageIcon icon =new ImageIcon("img\\bg.png");
         //scale image to fit in jlabel
         Image img=icon.getImage();
         Image imgScale=img.getScaledInstance(bglabel.getWidth(),bglabel.getHeight(),Image.SCALE_SMOOTH);
@@ -51,13 +51,13 @@ public class Login extends javax.swing.JFrame {
     }
   
         public void loginlogo(){
-           ImageIcon icon=new ImageIcon("C:\\Users\\kasun\\OneDrive\\Desktop\\Java\\lesson_manager\\img\\loginlogo.png");
+           ImageIcon icon=new ImageIcon("img\\loginlogo.png");
           loginlogo.setIcon(icon);
         
         }
         
         public void lmlogo(){
-            ImageIcon icon=new ImageIcon("C:\\Users\\kasun\\OneDrive\\Desktop\\Java\\lesson_manager\\img\\logor.png");
+            ImageIcon icon=new ImageIcon("img\\logor.png");
               //scale image to fit in jlabel
         Image img=icon.getImage();
         Image imgScale=img.getScaledInstance(lmlogo.getWidth(),lmlogo.getHeight(),Image.SCALE_SMOOTH);
