@@ -20,7 +20,7 @@ public class AdminDash extends javax.swing.JFrame {
     Color DefaultColor,ClickedColor;
     public AdminDash() {
         initComponents();
-        DefaultColor=new Color(13,36,51);
+        DefaultColor=new Color(190,239,221);
         ClickedColor=new Color(240,151,57);
         
         //Set defualt color to show on run time
@@ -183,7 +183,7 @@ public class AdminDash extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(allcusdesk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 720, 530));
@@ -205,7 +205,7 @@ public class AdminDash extends javax.swing.JFrame {
                 close_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(964, 34, 55, 49));
+        jPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, 55, 49));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kasun\\OneDrive\\Desktop\\lesson_manager\\img\\logor.png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 13, 119, 100));
@@ -214,7 +214,7 @@ public class AdminDash extends javax.swing.JFrame {
         jLabel2.setText("Welcome Invoice Calculator  ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 27, 264, 59));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 110));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 110));
 
         pack();
         setLocationRelativeTo(null);
