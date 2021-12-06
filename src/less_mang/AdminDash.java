@@ -234,6 +234,10 @@ public class AdminDash extends javax.swing.JFrame {
         notpaidcuspanel.setBackground(DefaultColor);
         paidcuspanel.setBackground(DefaultColor);
         
+        cus_intframe cuspanel= new cus_intframe();
+        allcusdesk.removeAll();
+        allcusdesk.add(cuspanel).setVisible(true);
+        
         
     }//GEN-LAST:event_cuspanelMousePressed
 
