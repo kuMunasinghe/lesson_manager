@@ -47,7 +47,7 @@ public class AdminDash extends javax.swing.JFrame {
         paidcuspanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        allcusdesk = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         close_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -61,6 +61,9 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cuspanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cuspanelMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cuspanelMousePressed(evt);
             }
@@ -89,6 +92,9 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel2.add(cuspanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 280, 110));
 
         notpaidcuspanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notpaidcuspanelMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 notpaidcuspanelMousePressed(evt);
             }
@@ -117,6 +123,9 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel2.add(notpaidcuspanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 280, 120));
 
         paidcuspanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paidcuspanelMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 paidcuspanelMousePressed(evt);
             }
@@ -149,16 +158,16 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 51));
         jPanel3.setForeground(new java.awt.Color(0, 51, 102));
 
-        jDesktopPane1.setBackground(new java.awt.Color(204, 255, 255));
+        allcusdesk.setBackground(new java.awt.Color(204, 255, 255));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout allcusdeskLayout = new javax.swing.GroupLayout(allcusdesk);
+        allcusdesk.setLayout(allcusdeskLayout);
+        allcusdeskLayout.setHorizontalGroup(
+            allcusdeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 834, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        allcusdeskLayout.setVerticalGroup(
+            allcusdeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 524, Short.MAX_VALUE)
         );
 
@@ -167,13 +176,13 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(allcusdesk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(allcusdesk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -224,6 +233,8 @@ public class AdminDash extends javax.swing.JFrame {
         cuspanel.setBackground(ClickedColor);
         notpaidcuspanel.setBackground(DefaultColor);
         paidcuspanel.setBackground(DefaultColor);
+        
+        
     }//GEN-LAST:event_cuspanelMousePressed
 
     private void notpaidcuspanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notpaidcuspanelMousePressed
@@ -239,6 +250,30 @@ public class AdminDash extends javax.swing.JFrame {
         notpaidcuspanel.setBackground(DefaultColor);
         paidcuspanel.setBackground(ClickedColor);
     }//GEN-LAST:event_paidcuspanelMousePressed
+
+    private void cuspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cuspanelMouseClicked
+        // TODO add your handling code here:
+        cus_intframe cuspanel= new cus_intframe();
+        allcusdesk.removeAll();
+        allcusdesk.add(cuspanel).setVisible(true);
+        
+        
+    }//GEN-LAST:event_cuspanelMouseClicked
+
+    private void notpaidcuspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notpaidcuspanelMouseClicked
+        // TODO add your handling code here:
+        notpaid_intframe notpaidcuspanel= new notpaid_intframe();
+        allcusdesk.removeAll();
+        allcusdesk.add(notpaidcuspanel).setVisible(true);
+    }//GEN-LAST:event_notpaidcuspanelMouseClicked
+
+    private void paidcuspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidcuspanelMouseClicked
+        // TODO add your handling code here:
+        paid_intframe paidcuspanel= new paid_intframe();
+        allcusdesk.removeAll();
+        allcusdesk.add(paidcuspanel).setVisible(true);
+        
+    }//GEN-LAST:event_paidcuspanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -276,9 +311,9 @@ public class AdminDash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane allcusdesk;
     private javax.swing.JButton close_btn;
     private javax.swing.JPanel cuspanel;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
