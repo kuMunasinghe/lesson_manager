@@ -47,6 +47,7 @@ public class cus_intframe extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(834, 524));
@@ -60,14 +61,14 @@ public class cus_intframe extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerID ", "CustomerName", "Month", "InvoiceID", "Payement", "PaymentStatus"
+                "CustomerID ", "CustomerName", "Month", "Duration", "InvoiceID", "Payement", "PaymentStatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true
+                false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,6 +95,15 @@ public class cus_intframe extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 40));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 0));
+        jButton2.setText("UPDATE");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,13 +132,18 @@ public class cus_intframe extends javax.swing.JInternalFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lesson_manager?zeroDateTimeBehavior=CONVERT_TO_NULL","root","");
             
             Statement st=con.createStatement();
-            String sql="select * from invoice";
+            String sql="SELECT invoice.ID,invoice.customer_ID,invoice.payment,invoice.status,customer_lessons.duration,customer.fname,customer.sname \n" +
+"from invoice \n" +
+"JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
+"JOIN customer on invoice.customer_ID=customer.ID;";
             ResultSet rs=st.executeQuery(sql);
             
             while(rs.next()){
                 // data will be add until finish
                 String InvoiceID=String.valueOf(rs.getInt("ID"));
-                String CustomerName="CusName";
+                String FirstName=rs.getString('fname');
+                String Surname=rs.getString("sname");
+                String Duration=String.valueOf(rs.getInt("duration"));
                 String CustomerID=String.valueOf(rs.getInt("customer_ID"));
                 String Month=rs.getString("month");
                 String Payment=String.valueOf(rs.getFloat("payment"));
@@ -153,9 +168,14 @@ public class cus_intframe extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton1MouseEntered
 
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        
+    }//GEN-LAST:event_jButton2MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
