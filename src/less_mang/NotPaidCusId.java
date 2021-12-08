@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package less_mang;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author kasun
@@ -100,14 +105,40 @@ public class NotPaidCusId extends javax.swing.JFrame {
     private void notpaidbtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notpaidbtnMousePressed
         // TODO add your handling code here:
         String sinvoiceid=notpaidtxt.getText();
-        int in_ID=Integer.parseInt(sinvoiceid);
-        System.out.println(in_ID);
+        int inId=Integer.parseInt(sinvoiceid);
+        Connection dbconn=DBConnection.connectDB();
+        if(dbconn!=null){
+            try{
+                PreparedStatement st=(PreparedStatement)
+                        dbconn.prepareStatement("SELECT invoice.month,invoice.ID,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname \n" +
+"from invoice \n" +
+"JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
+"JOIN customer on invoice.customer_ID=customer.ID\n" +
+"where invoice.status='Not_Paid';");
+                
+                ResultSet res=st.executeQuery();
+                while(res.next()){
+                // data will be add until finish
+                String InvoiceID=String.valueOf(res.getInt("ID"));
+                String Firstname=res.getString("fname");
+                String Surname=res.getString("sname");
+                String Duration=String.valueOf(res.getInt("duration"));
+                String CustomerID=String.valueOf(res.getInt("customer_ID"));
+                String Month=res.getString("month");
+                String Payment=String.valueOf(res.getFloat("payment"));
+            } 
+            
+        }
+            catch (SQLException ex) {
+                Logger.getLogger(NotPaidCusId.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }//GEN-LAST:event_notpaidbtnMousePressed
-
+  }
     /**
      * @param args the command line arguments
      */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -147,3 +178,4 @@ public class NotPaidCusId extends javax.swing.JFrame {
     private javax.swing.JTextField notpaidtxt;
     // End of variables declaration//GEN-END:variables
 }
+        

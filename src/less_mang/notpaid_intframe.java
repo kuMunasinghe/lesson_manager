@@ -166,7 +166,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-                  Connection dbconn=DBConnection.connectDB();
+        Connection dbconn=DBConnection.connectDB();
         if(dbconn!=null){
             try{
                 PreparedStatement st=(PreparedStatement)
@@ -186,14 +186,6 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 String Month=res.getString("month");
                 String Payment=String.valueOf(res.getFloat("payment"));
                 
-                
-                
-                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceID,Payment};
-                DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
-                
-                //add string arrya data into jtable
-                 tblModel.addRow(tbData);
-                 jTable1.revalidate();
             }
             
         }
