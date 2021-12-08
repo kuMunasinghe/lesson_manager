@@ -61,14 +61,14 @@ public class cus_intframe extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerID ", "CustomerName", "Month", "Duration", "InvoiceID", "Payement", "PaymentStatus"
+                "CustomerID ", "Firstname", "Surname", "Month", "Duration", "InvoiceID", "Payement", "PaymentStatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, true, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -127,7 +127,43 @@ public class cus_intframe extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         //databse connection
-        try{
+        Connection dbconn=DBConnection.connectDB();
+        if(dbconn!=null){
+            try{
+                PreparedStatement st=(PreparedStatement)
+                        dbconn.prepareStatement("SELECT invoice.month,invoice.ID,invoice.customer_ID,invoice.payment,invoice.status,customer_lessons.duration,customer.fname,customer.sname \n" +
+"from invoice \n" +
+"JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
+"JOIN customer on invoice.customer_ID=customer.ID;");
+                ResultSet res=st.executeQuery();
+                while(res.next()){
+                // data will be add until finish
+                String InvoiceID=String.valueOf(res.getInt("ID"));
+                String Firstname=res.getString("fname");
+                String Surname=res.getString("sname");
+                String Duration=String.valueOf(res.getInt("duration"));
+                String CustomerID=String.valueOf(res.getInt("customer_ID"));
+                String Month=res.getString("month");
+                String Payment=String.valueOf(res.getFloat("payment"));
+                String PaymentStatus=res.getString("status");
+                
+                
+                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceID,Payment,PaymentStatus};
+                DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
+                
+                //add string arrya data into jtable
+                 tblModel.addRow(tbData);
+            }
+            
+        }
+            catch(SQLException ex){
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+             System.out.println("The connection is not available");
+        }
+        /**try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lesson_manager?zeroDateTimeBehavior=CONVERT_TO_NULL","root","");
             
@@ -160,7 +196,7 @@ public class cus_intframe extends javax.swing.JInternalFrame {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
