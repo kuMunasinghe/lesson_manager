@@ -17,16 +17,18 @@ public class AdminDash extends javax.swing.JFrame {
      * Creates new form AdminDash
      */
     // define colors
-    Color DefaultColor,ClickedColor;
+    Color DefaultColor,ClickedColor,lightgreen,darkgreen;
     public AdminDash() {
         initComponents();
         DefaultColor=new Color(190,239,221);
         ClickedColor=new Color(240,151,57);
+        lightgreen=new Color(153,255,153);
+        darkgreen=new Color(0,255,102);
         
         //Set defualt color to show on run time
         
-        cuspanel.setBackground(DefaultColor);
-        notpaidcuspanel.setBackground(DefaultColor);
+        cuspanel.setBackground(lightgreen);
+        notpaidcuspanel.setBackground(darkgreen);
         paidcuspanel.setBackground(DefaultColor);
     }
 
@@ -60,6 +62,7 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cuspanel.setBackground(new java.awt.Color(153, 255, 153));
         cuspanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cuspanelMouseClicked(evt);
@@ -69,6 +72,7 @@ public class AdminDash extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setBackground(new java.awt.Color(153, 255, 153));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("All Customers");
 
@@ -91,6 +95,7 @@ public class AdminDash extends javax.swing.JFrame {
 
         jPanel2.add(cuspanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 280, 110));
 
+        notpaidcuspanel.setBackground(new java.awt.Color(0, 255, 102));
         notpaidcuspanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 notpaidcuspanelMouseClicked(evt);
@@ -164,7 +169,7 @@ public class AdminDash extends javax.swing.JFrame {
         allcusdesk.setLayout(allcusdeskLayout);
         allcusdeskLayout.setHorizontalGroup(
             allcusdeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 834, Short.MAX_VALUE)
+            .addGap(0, 722, Short.MAX_VALUE)
         );
         allcusdeskLayout.setVerticalGroup(
             allcusdeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +199,7 @@ public class AdminDash extends javax.swing.JFrame {
 
         close_btn.setBackground(new java.awt.Color(255, 255, 255));
         close_btn.setForeground(new java.awt.Color(255, 0, 0));
-        close_btn.setText("❌");
+        close_btn.setText("Logout ❌");
         close_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 close_btnMouseClicked(evt);
@@ -205,7 +210,7 @@ public class AdminDash extends javax.swing.JFrame {
                 close_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, 55, 49));
+        jPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(905, 30, 100, 49));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kasun\\OneDrive\\Desktop\\lesson_manager\\img\\logor.png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 13, 119, 100));
@@ -225,13 +230,17 @@ public class AdminDash extends javax.swing.JFrame {
     }//GEN-LAST:event_close_btnActionPerformed
 
     private void close_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_btnMouseClicked
-        this.dispose();
+         dispose();
+         Login d=new Login();
+         d.setTitle("Welcome Back !");
+         d.setVisible(true);
+        
     }//GEN-LAST:event_close_btnMouseClicked
 
     private void cuspanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cuspanelMousePressed
         // TODO add your handling code here:
         cuspanel.setBackground(ClickedColor);
-        notpaidcuspanel.setBackground(DefaultColor);
+        notpaidcuspanel.setBackground(darkgreen);
         paidcuspanel.setBackground(DefaultColor);
         
         cus_intframe cuspanel= new cus_intframe();
@@ -243,7 +252,7 @@ public class AdminDash extends javax.swing.JFrame {
 
     private void notpaidcuspanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notpaidcuspanelMousePressed
         // TODO add your handling code here:
-        cuspanel.setBackground(DefaultColor);
+        cuspanel.setBackground(lightgreen);
         notpaidcuspanel.setBackground(ClickedColor);
         paidcuspanel.setBackground(DefaultColor);
         
@@ -251,8 +260,8 @@ public class AdminDash extends javax.swing.JFrame {
 
     private void paidcuspanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidcuspanelMousePressed
         // TODO add your handling code here:
-        cuspanel.setBackground(DefaultColor);
-        notpaidcuspanel.setBackground(DefaultColor);
+        cuspanel.setBackground(lightgreen);
+        notpaidcuspanel.setBackground(darkgreen);
         paidcuspanel.setBackground(ClickedColor);
     }//GEN-LAST:event_paidcuspanelMousePressed
 
@@ -274,9 +283,7 @@ public class AdminDash extends javax.swing.JFrame {
 
     private void paidcuspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidcuspanelMouseClicked
         // TODO add your handling code here:
-        paid_intframe paidcuspanel= new paid_intframe();
-        allcusdesk.removeAll();
-        allcusdesk.add(paidcuspanel).setVisible(true);
+        
         
     }//GEN-LAST:event_paidcuspanelMouseClicked
 
