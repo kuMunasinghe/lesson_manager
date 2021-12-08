@@ -158,7 +158,7 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 51));
         jPanel3.setForeground(new java.awt.Color(0, 51, 102));
 
-        allcusdesk.setBackground(new java.awt.Color(204, 255, 255));
+        allcusdesk.setBackground(new java.awt.Color(0, 0, 51));
 
         javax.swing.GroupLayout allcusdeskLayout = new javax.swing.GroupLayout(allcusdesk);
         allcusdesk.setLayout(allcusdeskLayout);
@@ -246,6 +246,7 @@ public class AdminDash extends javax.swing.JFrame {
         cuspanel.setBackground(DefaultColor);
         notpaidcuspanel.setBackground(ClickedColor);
         paidcuspanel.setBackground(DefaultColor);
+        
     }//GEN-LAST:event_notpaidcuspanelMousePressed
 
     private void paidcuspanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidcuspanelMousePressed

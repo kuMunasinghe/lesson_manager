@@ -143,6 +143,7 @@ public class cus_intframe extends javax.swing.JInternalFrame {
                 
                 //add string arrya data into jtable
                  tblModel.addRow(tbData);
+                 jTable1.revalidate();
             }
             
         }
