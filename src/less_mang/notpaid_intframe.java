@@ -79,7 +79,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 549, 149));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 650, 320));
 
         generateInvoice.setBackground(new java.awt.Color(51, 255, 51));
         generateInvoice.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -120,7 +120,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

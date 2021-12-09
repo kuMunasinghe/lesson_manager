@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.util.Properties;    
+import javax.mail.*;    
+import javax.mail.internet.*; 
+//import javax.swing.JOptionPane;
+
 /**
  *
  * @author kasun
@@ -33,7 +38,7 @@ public class InvoiceForm extends javax.swing.JFrame {
            
             try{
                 PreparedStatement st=(PreparedStatement)
-                        dbconn.prepareStatement("SELECT invoice.month,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname "
+                        dbconn.prepareStatement("SELECT invoice.month,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname,customer.email "
                                 + "from invoice "
                                 + "JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID "
                                 + "JOIN customer on invoice.customer_ID=customer.ID "
@@ -50,6 +55,7 @@ public class InvoiceForm extends javax.swing.JFrame {
                     String h=String.valueOf(hr);  
                     hour.setText(h);
                     pay.setText(res.getString("payment"));
+                    emailGetter(res.getString("email"),res.getString("fname"),res.getString("sname"),res.getString("month"),h,res.getString("payment"));
                       
                
                 }
@@ -60,6 +66,14 @@ public class InvoiceForm extends javax.swing.JFrame {
             
     }
    }
+    
+    private void emailGetter(String email,String fname,String sname,String month,String hour,String pay){
+        
+         String msg="Dear"+" "+fname+" "+sname
+                 +"\n\n\n"+"your bill for "+hour+"s "+"for "+month+", "+"Rs. "+pay+"."+"\n\n"+"Thank you for using Lesson Manager.";
+                           
+         InvoiceForm.send("lessonmanagerbygroup3@gmail.com","!@#$1234qwer",email,"Lesson Manager Payement Reminder",msg); 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,6 +176,11 @@ public class InvoiceForm extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Send via Email");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
@@ -191,7 +210,7 @@ public class InvoiceForm extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 490));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +226,14 @@ public class InvoiceForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        //email sender
+         
+        
+         
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -262,4 +289,39 @@ public class InvoiceForm extends javax.swing.JFrame {
     private javax.swing.JLabel pay;
     private javax.swing.JLabel sn;
     // End of variables declaration//GEN-END:variables
-}
+
+public static void send(String from,String password,String to,String sub,String msg){  
+          //Get properties object    
+          Properties props = new Properties();    
+          props.put("mail.smtp.host", "smtp.gmail.com");    
+          props.put("mail.smtp.socketFactory.port", "465");    
+          props.put("mail.smtp.socketFactory.class",    
+                    "javax.net.ssl.SSLSocketFactory");    
+          props.put("mail.smtp.auth", "true");    
+          props.put("mail.smtp.port", "465");    
+          //get Session   
+          Session session = Session.getDefaultInstance(props,    
+           new javax.mail.Authenticator() {    
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication() {    
+           return new PasswordAuthentication(from,password);  
+           }    
+          });    
+          //compose message    
+          try {    
+           MimeMessage message = new MimeMessage(session);    
+           message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+           message.setSubject(sub);    
+           message.setText(msg);    
+           //send message  
+           Transport.send(message);
+           System.out.println("message sent successfully");    
+           
+           
+          } 
+          catch (MessagingException e)
+           {
+               throw new RuntimeException(e);
+            }    
+             
+    } }

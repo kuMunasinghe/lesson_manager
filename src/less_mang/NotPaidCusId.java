@@ -214,6 +214,7 @@ public class NotPaidCusId extends javax.swing.JFrame {
          try{
              PreparedStatement pstmt=dbconn.prepareStatement(sqlStat);
              pstmt.executeUpdate();
+             dispose();
              new InvoiceForm(CustomerID,invoiceID).setVisible(true);
              //System.out.println("DONE");
              
