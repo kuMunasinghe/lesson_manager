@@ -128,7 +128,7 @@ public class NotPaidCusId extends javax.swing.JFrame {
 "from invoice\n" +
 "JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
 "JOIN customer on invoice.customer_ID=customer.ID\n" +
-"where invoice.status='Not_Paid' AND invoice.ID=? ;");
+"where invoice.status='Not_Paid' AND invoice.ID=?  ;");
                 
                 st.setString(1, sinvoiceid);
                 ResultSet res=st.executeQuery();
@@ -141,8 +141,9 @@ public class NotPaidCusId extends javax.swing.JFrame {
                 int dur=Integer.parseInt(Duration);
                 float payrate=1000;
                 float paygen=payrate*(dur/60);
-                invoiceGEN(sinvoiceid,paygen);
+             
                 String CustomerID=String.valueOf(res.getInt("customer_ID"));
+                invoiceGEN(CustomerID,sinvoiceid,paygen);
                 String Month=res.getString("month");
                 //String Payment=String.valueOf(res.getFloat("payment"));
                 //System.out.println(CustomerID);
@@ -205,15 +206,18 @@ public class NotPaidCusId extends javax.swing.JFrame {
     private javax.swing.JTextField notpaidtxt;
     // End of variables declaration//GEN-END:variables
 
-    public void invoiceGEN(String invoiceID,float paygen){
+    public void invoiceGEN(String CustomerID,String invoiceID,float paygen){
         
         Connection dbconn=DBConnection.connectDB();
         String sqlStat="UPDATE invoice set payment='"+paygen+"' WHERE ID='"+invoiceID+"'";
-        //String stmt="SELECT password FROM useraccount WHERE login_id= admin";
+        
          try{
              PreparedStatement pstmt=dbconn.prepareStatement(sqlStat);
              pstmt.executeUpdate();
-             System.out.println("DONE");
+             new InvoiceForm(CustomerID,invoiceID).setVisible(true);
+             //System.out.println("DONE");
+             
+             
          }
          catch(SQLException ex){
              System.out.println(ex.getMessage());

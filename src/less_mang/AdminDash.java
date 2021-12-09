@@ -106,23 +106,23 @@ public class AdminDash extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Not Paid Customers");
+        jLabel4.setText("Invoice Section");
 
         javax.swing.GroupLayout notpaidcuspanelLayout = new javax.swing.GroupLayout(notpaidcuspanel);
         notpaidcuspanel.setLayout(notpaidcuspanelLayout);
         notpaidcuspanelLayout.setHorizontalGroup(
             notpaidcuspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notpaidcuspanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel4)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         notpaidcuspanelLayout.setVerticalGroup(
             notpaidcuspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notpaidcuspanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addGap(28, 28, 28))
         );
 
         jPanel2.add(notpaidcuspanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 280, 120));

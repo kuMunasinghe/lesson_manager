@@ -46,14 +46,15 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 0, 51));
         setPreferredSize(new java.awt.Dimension(834, 524));
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(722, 524));
         jPanel1.setVerifyInputWhenFocusTarget(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 51));
-        jLabel2.setText("To Be Paid ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 27, -1, -1));
+        jLabel2.setText("Invoice Section  ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,7 +113,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, 32));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 22, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,11 +150,11 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
         if(dbconn!=null){
             try{
                 PreparedStatement st=(PreparedStatement)
-                        dbconn.prepareStatement("SELECT invoice.month,invoice.ID,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname \n" +
+                        dbconn.prepareStatement("SELECT invoice.month,invoice.ID,invoice.customer_ID,customer_lessons.duration,customer.fname,customer.sname \n" +
 "from invoice \n" +
 "JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
 "JOIN customer on invoice.customer_ID=customer.ID\n" +
-"where invoice.status='Not_Paid';");
+"where invoice.payment='0';");
                 ResultSet res=st.executeQuery();
                 while(res.next()){
                 // data will be add until finish
