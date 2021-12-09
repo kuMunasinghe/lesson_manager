@@ -127,6 +127,8 @@ public class NotPaidCusId extends javax.swing.JFrame {
                 String CustomerID=String.valueOf(res.getInt("customer_ID"));
                 String Month=res.getString("month");
                 String Payment=String.valueOf(res.getFloat("payment"));
+                
+                
             } 
             
         }

@@ -89,7 +89,7 @@
                     <Column editable="false" title="Surname" type="java.lang.Object"/>
                     <Column editable="false" title="Month" type="java.lang.Object"/>
                     <Column editable="false" title="Duration" type="java.lang.Object"/>
-                    <Column editable="false" title="Payment" type="java.lang.Object"/>
+                    <Column editable="false" title="InvoiceID" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>

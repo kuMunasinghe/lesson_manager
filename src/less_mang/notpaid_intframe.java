@@ -60,7 +60,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerID", "Firstname", "Surname", "Month", "Duration", "Payment"
+                "CustomerID", "Firstname", "Surname", "Month", "Duration", "InvoiceID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -164,7 +164,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 String CustomerID=String.valueOf(res.getInt("customer_ID"));
                 String Month=res.getString("month");
                 String Payment=String.valueOf(res.getFloat("payment"));
-                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceID,Payment};
+                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceID};
                 DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
                 
                 //add string arrya data into jtable
