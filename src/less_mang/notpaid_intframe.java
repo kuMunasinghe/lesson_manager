@@ -60,7 +60,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerID", "Firstname", "Surname", "Month", "Duration", "InvoiceID"
+                "CustomerID", "Firstname", "Surname", "Month", "Duration", "InvoiceNo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -157,14 +157,14 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                 ResultSet res=st.executeQuery();
                 while(res.next()){
                 // data will be add until finish
-                String InvoiceID=String.valueOf(res.getInt("ID"));
+                String InvoiceNo=String.valueOf(res.getInt("ID"));
                 String Firstname=res.getString("fname");
                 String Surname=res.getString("sname");
                 String Duration=String.valueOf(res.getInt("duration"));
                 String CustomerID=String.valueOf(res.getInt("customer_ID"));
                 String Month=res.getString("month");
-                String Payment=String.valueOf(res.getFloat("payment"));
-                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceID};
+               // String Payment=String.valueOf(res.getFloat("payment"));
+                String tbData[]={CustomerID,Firstname,Surname,Month,Duration,InvoiceNo};
                 DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
                 
                 //add string arrya data into jtable
@@ -172,6 +172,7 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
                  jTable1.revalidate();
                 
             }
+                
             
         }
             catch(SQLException ex){
@@ -200,3 +201,6 @@ public class notpaid_intframe extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
