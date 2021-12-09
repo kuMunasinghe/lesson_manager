@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import java.util.Properties;    
 import javax.mail.*;    
 import javax.mail.internet.*; 
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 //import javax.swing.JOptionPane;
 
 /**
@@ -22,9 +24,11 @@ import javax.mail.internet.*;
  */
 public class InvoiceForm extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form InvoiceForm
      */ 
+    String []  array= new String[2];
     public InvoiceForm() {
         initComponents();
     }
@@ -67,12 +71,18 @@ public class InvoiceForm extends javax.swing.JFrame {
     }
    }
     
-    private void emailGetter(String email,String fname,String sname,String month,String hour,String pay){
+    public String[] emailGetter(String email,String fname,String sname,String month,String hour,String pay){
         
          String msg="Dear"+" "+fname+" "+sname
-                 +"\n\n\n"+"your bill for "+hour+"s "+"for "+month+", "+"Rs. "+pay+"."+"\n\n"+"Thank you for using Lesson Manager.";
-                           
-         InvoiceForm.send("lessonmanagerbygroup3@gmail.com","!@#$1234qwer",email,"Lesson Manager Payement Reminder",msg); 
+                 +"\n\n\n"+"your bill for "+"hours "+hour+"s "+"for "+month+", "+"Rs. "+pay+"."+"\n\n"+"Thank you for using Lesson Manager.";
+        
+        
+         array[0]=email;
+         array[1]=msg;
+         
+         return array;
+               
+         
     }
 
     /**
@@ -191,32 +201,32 @@ public class InvoiceForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))))
+                        .addGap(55, 55, 55))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 389, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(24, 24, 24))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 490));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,9 +240,9 @@ public class InvoiceForm extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         //email sender
-         
         
-         
+        InvoiceForm.send("lessonmanagerbygroup3@gmail.com","!@#$1234qwer",array[0],"Lesson Manager Payement Reminder",array[1]); 
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -315,7 +325,10 @@ public static void send(String from,String password,String to,String sub,String 
            message.setText(msg);    
            //send message  
            Transport.send(message);
-           System.out.println("message sent successfully");    
+           System.out.println("message sent successfully");   
+           EmailCom d=new EmailCom();
+                d.setTitle("Invoice Sent");
+                d.setVisible(true);
            
            
           } 
