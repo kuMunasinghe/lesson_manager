@@ -35,6 +35,7 @@ public class NotPaidCusId extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         notpaidtxt = new javax.swing.JTextField();
         notpaidbtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setAlwaysOnTop(true);
         setResizable(false);
@@ -44,7 +45,7 @@ public class NotPaidCusId extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel1.setText("Please Enter the Customer ID ••••••••");
+        jLabel1.setText("Enter the Relavant Invoice Number");
 
         notpaidtxt.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 
@@ -63,34 +64,43 @@ public class NotPaidCusId extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel2.setText("✔️");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(15, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(notpaidtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(notpaidbtn)
-                .addGap(81, 81, 81))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(notpaidtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(notpaidbtn)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(notpaidtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
                 .addComponent(notpaidbtn)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 290));
@@ -107,37 +117,51 @@ public class NotPaidCusId extends javax.swing.JFrame {
         // TODO add your handling code here:
         String sinvoiceid=notpaidtxt.getText();
         int inId=Integer.parseInt(sinvoiceid);
+        
+        
         Connection dbconn=DBConnection.connectDB();
         if(dbconn!=null){
+           
             try{
                 PreparedStatement st=(PreparedStatement)
-                        dbconn.prepareStatement("SELECT invoice.month,invoice.ID,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname \n" +
-"from invoice \n" +
+                        dbconn.prepareStatement("SELECT invoice.month,invoice.customer_ID,invoice.payment,customer_lessons.duration,customer.fname,customer.sname\n" +
+"from invoice\n" +
 "JOIN customer_lessons on invoice.customer_ID=customer_lessons.customer_ID\n" +
 "JOIN customer on invoice.customer_ID=customer.ID\n" +
-"where invoice.status='Not_Paid';");
+"where invoice.status='Not_Paid' AND invoice.ID=?  ;");
                 
+                st.setString(1, sinvoiceid);
                 ResultSet res=st.executeQuery();
-                while(res.next()){
+                if(res.next()){
                 // data will be add until finish
-                String InvoiceID=String.valueOf(res.getInt("ID"));
+                //String InvoiceID=String.valueOf(res.getInt("ID"));
                 String Firstname=res.getString("fname");
                 String Surname=res.getString("sname");
                 String Duration=String.valueOf(res.getInt("duration"));
+                int dur=Integer.parseInt(Duration);
+                float payrate=1000;
+                float paygen=payrate*(dur/60);
+             
                 String CustomerID=String.valueOf(res.getInt("customer_ID"));
+                invoiceGEN(CustomerID,sinvoiceid,paygen);
                 String Month=res.getString("month");
-                String Payment=String.valueOf(res.getFloat("payment"));
+                //String Payment=String.valueOf(res.getFloat("payment"));
+                //System.out.println(CustomerID);
+                //System.out.println(paygen); 
                 
-                
-            } 
-            
+   
+            }
+           
+               //String sqlStat="UPDATE invoice set payment='"+paygenstat+"' WHERE ID='"+sinvoiceid+"'";
+ 
         }
             catch (SQLException ex) {
                 Logger.getLogger(NotPaidCusId.class.getName()).log(Level.SEVERE, null, ex);
             }
         
     }//GEN-LAST:event_notpaidbtnMousePressed
-  }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -176,9 +200,31 @@ public class NotPaidCusId extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton notpaidbtn;
     private javax.swing.JTextField notpaidtxt;
     // End of variables declaration//GEN-END:variables
-}
+
+    public void invoiceGEN(String CustomerID,String invoiceID,float paygen){
         
+        Connection dbconn=DBConnection.connectDB();
+        String sqlStat="UPDATE invoice set payment='"+paygen+"' WHERE ID='"+invoiceID+"'";
+        
+         try{
+             PreparedStatement pstmt=dbconn.prepareStatement(sqlStat);
+             pstmt.executeUpdate();
+             new InvoiceForm(CustomerID,invoiceID).setVisible(true);
+             //System.out.println("DONE");
+             
+             
+         }
+         catch(SQLException ex){
+             System.out.println(ex.getMessage());
+         }
+                  
+        
+}
+   
+}
+     
